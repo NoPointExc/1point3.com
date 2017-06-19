@@ -3,7 +3,8 @@ import scrapy
 NEW_POSITIONS ="http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=198&typeid=653&orderby=dateline&sortid=192&typeid=653&orderby=dateline&sortid=192&filter=typeid"
 INTERVIEW_REPORTS="http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=145&orderby=dateline&sortid=311&orderby=dateline&sortid=311&filter=author&page=1"
 SCHOOL_APPLYS="http://www.1point3acres.com/bbs/forum-27-1.html"
-PAGE_1 = SCHOOL_APPLYS
+TOFEL_EXAM="http://www.1point3acres.com/bbs/forum.php?mod=forumdisplay&fid=125&filter=typeid&typeid=472&sortid=313"
+PAGE_1 = TOFEL_EXAM
 
 # response.css("span[title^='共']::text").extract_first()
 # ' / 28 页'
@@ -25,8 +26,8 @@ class PostTime(scrapy.Spider):
         if(total_page_text):
             total_page = int(total_page_text[3:-1])
             for p in range(1, total_page + 1):
-                #next_url = PAGE_1 + '&page=' +  str(p)
-                next_url = PAGE_1[:-6] + str(p) + ".html"
+                next_url = PAGE_1 + '&page=' +  str(p)
+                #next_url = PAGE_1[:-6] + str(p) + ".html"
                 #print('**************')
                 #print(next_url)
                 yield scrapy.Request(url = next_url, callback=self.parse_list)
